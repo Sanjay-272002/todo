@@ -13,6 +13,7 @@ import {TodoContext} from "../context/todocontext"
 import { ADD_TODO } from "../context/action.types";
 const TodoForm = ()=>{
     const [todoString,setTodoString]=useState("");
+    const [todoTime,setTodotime]=useState("");
     const {dispatch} = useContext(TodoContext);
     const handleSubmit = e =>{
         e.preventDefault();
@@ -21,13 +22,16 @@ const TodoForm = ()=>{
         }
         const todo={
             todoString,
-            id: v4()
+            id: v4(),
+            todoTime,
+            com: false
         }
         dispatch({
             type:ADD_TODO,
             payload: todo
         })
         setTodoString("");
+        setTodotime("");
     }
    return(
   <Container>
@@ -40,6 +44,14 @@ const TodoForm = ()=>{
             placeholder="Your next Todo"
             value={todoString}
             onChange={e => setTodoString(e.target.value)}
+            /> 
+            <Input
+            type="time"
+            name="todo"
+            id="todo"
+            placeholder="Time to start"
+            value={todoTime}
+            onChange={e => setTodotime(e.target.value)}
             /> 
                 <Button color="warning">
                     Add
